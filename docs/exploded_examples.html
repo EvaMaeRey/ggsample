@@ -26,15 +26,274 @@ class: center, middle, inverse, title-slide
 
 count: false
  
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+*set.seed(1323)
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+*library(ggplot2)
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+*ggplot(data = cars)
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_03_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+* aes(x = speed)
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+* aes(y = dist)
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+* geom_point(color = "olivedrab4")
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4") +
+* geom_smooth(method = lm,
+*             se = FALSE)
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4") +
+  geom_smooth(method = lm,
+              se = FALSE) +
+* labs(caption = "population are observations from cars correlation study dataset")
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4") +
+  geom_smooth(method = lm,
+              se = FALSE) +
+  labs(caption = "population are observations from cars correlation study dataset") +
+* facet_sample(n_sampled = 8)
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_09_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4") +
+  geom_smooth(method = lm,
+              se = FALSE) +
+  labs(caption = "population are observations from cars correlation study dataset") +
+  facet_sample(n_sampled = 8) +
+* labs(title = "16 draws, random sample of 8 observations from the population")
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_10_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_sample
+.panel1-facet_sample_1-auto[
+
+```r
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4") +
+  geom_smooth(method = lm,
+              se = FALSE) +
+  labs(caption = "population are observations from cars correlation study dataset") +
+  facet_sample(n_sampled = 8) +
+  labs(title = "16 draws, random sample of 8 observations from the population") +
+* labs(subtitle = "Depending on our particular random sample, slopes are flatter or steepernand intercepts vary")
+```
+]
+ 
+.panel2-facet_sample_1-auto[
+![](exploded_examples_files/figure-html/facet_sample_1_auto_11_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-facet_sample_1-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-facet_sample_1-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-facet_sample_1-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+
+
+---
+
+count: false
+ 
 ### geom_lm_sample
-.panel1-geom_lm_sample_1-auto[
+.panel1-geom_lm_sample_2-auto[
 
 ```r
 *my_seed &lt;- sample(1:100, 1)
 ```
 ]
  
-.panel2-geom_lm_sample_1-auto[
+.panel2-geom_lm_sample_2-auto[
 
 ]
 
@@ -42,7 +301,7 @@ count: false
 count: false
  
 ### geom_lm_sample
-.panel1-geom_lm_sample_1-auto[
+.panel1-geom_lm_sample_2-auto[
 
 ```r
 my_seed &lt;- sample(1:100, 1)
@@ -50,7 +309,7 @@ my_seed &lt;- sample(1:100, 1)
 ```
 ]
  
-.panel2-geom_lm_sample_1-auto[
+.panel2-geom_lm_sample_2-auto[
 
 ]
 
@@ -58,7 +317,7 @@ my_seed &lt;- sample(1:100, 1)
 count: false
  
 ### geom_lm_sample
-.panel1-geom_lm_sample_1-auto[
+.panel1-geom_lm_sample_2-auto[
 
 ```r
 my_seed &lt;- sample(1:100, 1)
@@ -67,15 +326,15 @@ library(ggplot2)
 ```
 ]
  
-.panel2-geom_lm_sample_1-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_1_auto_03_output-1.png)&lt;!-- --&gt;
+.panel2-geom_lm_sample_2-auto[
+![](exploded_examples_files/figure-html/geom_lm_sample_2_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_lm_sample
-.panel1-geom_lm_sample_1-auto[
+.panel1-geom_lm_sample_2-auto[
 
 ```r
 my_seed &lt;- sample(1:100, 1)
@@ -85,15 +344,15 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_lm_sample_1-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_1_auto_04_output-1.png)&lt;!-- --&gt;
+.panel2-geom_lm_sample_2-auto[
+![](exploded_examples_files/figure-html/geom_lm_sample_2_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_lm_sample
-.panel1-geom_lm_sample_1-auto[
+.panel1-geom_lm_sample_2-auto[
 
 ```r
 my_seed &lt;- sample(1:100, 1)
@@ -104,15 +363,15 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_lm_sample_1-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_1_auto_05_output-1.png)&lt;!-- --&gt;
+.panel2-geom_lm_sample_2-auto[
+![](exploded_examples_files/figure-html/geom_lm_sample_2_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_lm_sample
-.panel1-geom_lm_sample_1-auto[
+.panel1-geom_lm_sample_2-auto[
 
 ```r
 my_seed &lt;- sample(1:100, 1)
@@ -125,15 +384,15 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_lm_sample_1-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_1_auto_06_output-1.png)&lt;!-- --&gt;
+.panel2-geom_lm_sample_2-auto[
+![](exploded_examples_files/figure-html/geom_lm_sample_2_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_lm_sample
-.panel1-geom_lm_sample_1-auto[
+.panel1-geom_lm_sample_2-auto[
 
 ```r
 my_seed &lt;- sample(1:100, 1)
@@ -148,15 +407,15 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_lm_sample_1-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_1_auto_07_output-1.png)&lt;!-- --&gt;
+.panel2-geom_lm_sample_2-auto[
+![](exploded_examples_files/figure-html/geom_lm_sample_2_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_lm_sample
-.panel1-geom_lm_sample_1-auto[
+.panel1-geom_lm_sample_2-auto[
 
 ```r
 my_seed &lt;- sample(1:100, 1)
@@ -173,12 +432,12 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_lm_sample_1-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_1_auto_08_output-1.png)&lt;!-- --&gt;
+.panel2-geom_lm_sample_2-auto[
+![](exploded_examples_files/figure-html/geom_lm_sample_2_auto_08_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-geom_lm_sample_1-auto {
+.panel1-geom_lm_sample_2-auto {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -186,7 +445,7 @@ ggplot(data = cars) +
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-geom_lm_sample_1-auto {
+.panel2-geom_lm_sample_2-auto {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -194,7 +453,7 @@ ggplot(data = cars) +
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-geom_lm_sample_1-auto {
+.panel3-geom_lm_sample_2-auto {
   color: black;
   width: NA%;
   hight: 33%;
@@ -215,7 +474,7 @@ ggplot(data = cars) +
 count: false
  
 ### geom_point_sample
-.panel1-geom_point_sample_2-auto[
+.panel1-geom_point_sample_3-auto[
 
 ```r
 # using the function
@@ -223,7 +482,7 @@ count: false
 ```
 ]
  
-.panel2-geom_point_sample_2-auto[
+.panel2-geom_point_sample_3-auto[
 
 ]
 
@@ -231,7 +490,7 @@ count: false
 count: false
  
 ### geom_point_sample
-.panel1-geom_point_sample_2-auto[
+.panel1-geom_point_sample_3-auto[
 
 ```r
 # using the function
@@ -240,7 +499,7 @@ set.seed(92389)
 ```
 ]
  
-.panel2-geom_point_sample_2-auto[
+.panel2-geom_point_sample_3-auto[
 
 ]
 
@@ -248,7 +507,7 @@ set.seed(92389)
 count: false
  
 ### geom_point_sample
-.panel1-geom_point_sample_2-auto[
+.panel1-geom_point_sample_3-auto[
 
 ```r
 # using the function
@@ -258,15 +517,15 @@ library(ggplot2)
 ```
 ]
  
-.panel2-geom_point_sample_2-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_2_auto_03_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_sample_3-auto[
+![](exploded_examples_files/figure-html/geom_point_sample_3_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_point_sample
-.panel1-geom_point_sample_2-auto[
+.panel1-geom_point_sample_3-auto[
 
 ```r
 # using the function
@@ -277,15 +536,15 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_point_sample_2-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_2_auto_04_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_sample_3-auto[
+![](exploded_examples_files/figure-html/geom_point_sample_3_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_point_sample
-.panel1-geom_point_sample_2-auto[
+.panel1-geom_point_sample_3-auto[
 
 ```r
 # using the function
@@ -297,15 +556,15 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_point_sample_2-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_2_auto_05_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_sample_3-auto[
+![](exploded_examples_files/figure-html/geom_point_sample_3_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_point_sample
-.panel1-geom_point_sample_2-auto[
+.panel1-geom_point_sample_3-auto[
 
 ```r
 # using the function
@@ -318,15 +577,15 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_point_sample_2-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_2_auto_06_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_sample_3-auto[
+![](exploded_examples_files/figure-html/geom_point_sample_3_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_point_sample
-.panel1-geom_point_sample_2-auto[
+.panel1-geom_point_sample_3-auto[
 
 ```r
 # using the function
@@ -341,15 +600,15 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_point_sample_2-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_2_auto_07_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_sample_3-auto[
+![](exploded_examples_files/figure-html/geom_point_sample_3_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 ### geom_point_sample
-.panel1-geom_point_sample_2-auto[
+.panel1-geom_point_sample_3-auto[
 
 ```r
 # using the function
@@ -366,12 +625,12 @@ ggplot(data = cars) +
 ```
 ]
  
-.panel2-geom_point_sample_2-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_2_auto_08_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_sample_3-auto[
+![](exploded_examples_files/figure-html/geom_point_sample_3_auto_08_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-geom_point_sample_2-auto {
+.panel1-geom_point_sample_3-auto {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -379,7 +638,7 @@ ggplot(data = cars) +
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-geom_point_sample_2-auto {
+.panel2-geom_point_sample_3-auto {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -387,7 +646,7 @@ ggplot(data = cars) +
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-geom_point_sample_2-auto {
+.panel3-geom_point_sample_3-auto {
   color: black;
   width: NA%;
   hight: 33%;
