@@ -1,0 +1,39 @@
+---
+title: ggsample
+subtitle: ""
+author: "Exploded Examples"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, echo = F}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F, fig.height = 6, comment = "")
+options(knitr.duplicate.label = "allow")
+library(ggsample)
+```
+
+
+---
+
+`r flipbookr::chunk_reveal('geom_point_sample_1', title = '### geom_point_sample')`
+
+```{r geom_point_sample_1, include = F}
+# using the function
+set.seed(92389)
+library(ggplot2)
+ggplot(data = cars) +
+ aes(x = speed, y = dist) +
+ geom_point() +
+ geom_point_sample(color = "red") +
+ geom_point_sample(color = "green", sample_size = 5) +
+ geom_point_sample(sample_size = 2, color = "blue")
+```
+
+
