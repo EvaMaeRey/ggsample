@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — facet_sample • ggsample</title>
+<title>Title — facet_sample_prop • ggsample</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Title — facet_sample" />
+<meta property="og:title" content="Title — facet_sample_prop" />
 <meta property="og:description" content="Title" />
 <meta name="twitter:card" content="summary" />
 
@@ -102,16 +102,16 @@
     <div class="page-header">
     <h1>Title</h1>
     
-    <div class="hidden name"><code>facet_sample.Rd</code></div>
+    <div class="hidden name"><code>facet_sample_prop.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Title</p>
     </div>
 
-    <pre class="usage"><span class='fu'>facet_sample</span>(
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>16</span>,
-  <span class='kw'>n_sampled</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+    <pre class="usage"><span class='fu'>facet_sample_prop</span>(
+  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>9</span>,
+  <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
   <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>,
@@ -128,8 +128,8 @@
       <td><p>number of facets</p></td>
     </tr>
     <tr>
-      <th>n_sampled</th>
-      <td><p>sample size</p></td>
+      <th>prop</th>
+      <td><p>numeric proportion to sample, defaults to .2</p></td>
     </tr>
     <tr>
       <th>nrow</th>
@@ -159,7 +159,9 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a ggplot2 facet specification</p>
+    
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1323</span>)
@@ -168,12 +170,9 @@
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>speed</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>dist</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"olivedrab4"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>lm</span>,
-              <span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"Population are observations from cars correlation study dataset"</span>) +
-  <span class='fu'>facet_sample</span>(<span class='kw'>n_sampled</span> <span class='kw'>=</span> <span class='fl'>8</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"16 draws, random sample of 8 observations from the population"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"Depending on our particular random sample, slopes are flatter or steeper\nand intercepts vary"</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using formula 'y ~ x'</span></div><div class='img'><img src='facet_sample-1.png' alt='' width='700' height='433' /></div></pre>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>lm</span>, <span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
+  <span class='fu'>facet_sample_prop</span>() +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Random Sample, 20% of population"</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using formula 'y ~ x'</span></div><div class='img'><img src='facet_sample_prop-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

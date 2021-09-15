@@ -22,9 +22,28 @@ library(ggsample)
 
 ---
 
-`r flipbookr::chunk_reveal('facet_sample_1', title = '### facet_sample')`
+`r flipbookr::chunk_reveal('facet_bootstrap_1', title = '### facet_bootstrap')`
 
-```{r facet_sample_1, include = F}
+```{r facet_bootstrap_1, include = F}
+library(ggplot2)
+set.seed(1323)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4",
+             alpha = .5) +
+  geom_count(alpha = .2) +
+  facet_bootstrap(n = 12) +
+  geom_smooth(method = lm, se = FALSE)
+```
+
+
+
+---
+
+`r flipbookr::chunk_reveal('facet_sample_2', title = '### facet_sample')`
+
+```{r facet_sample_2, include = F}
 set.seed(1323)
 library(ggplot2)
 ggplot(data = cars) +
@@ -33,7 +52,7 @@ ggplot(data = cars) +
   geom_point(color = "olivedrab4") +
   geom_smooth(method = lm,
               se = FALSE) +
-  labs(caption = "population are observations from cars correlation study dataset") +
+  labs(caption = "Population are observations from cars correlation study dataset") +
   facet_sample(n_sampled = 8) +
   labs(title = "16 draws, random sample of 8 observations from the population") +
   labs(subtitle = "Depending on our particular random sample, slopes are flatter or steepernand intercepts vary")
@@ -43,9 +62,45 @@ ggplot(data = cars) +
 
 ---
 
-`r flipbookr::chunk_reveal('geom_lm_sample_2', title = '### geom_lm_sample')`
+`r flipbookr::chunk_reveal('facet_sample_prop_3', title = '### facet_sample_prop')`
 
-```{r geom_lm_sample_2, include = F}
+```{r facet_sample_prop_3, include = F}
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4") +
+  geom_smooth(method = lm, se = FALSE) +
+  facet_sample_prop() +
+  labs(title = "Random Sample, 20% of population")
+```
+
+
+
+---
+
+`r flipbookr::chunk_reveal('facet_scramble_4', title = '### facet_scramble')`
+
+```{r facet_scramble_4, include = F}
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "springgreen4",
+           alpha = .75) +
+  facet_scramble(n = 12) +
+  geom_smooth(method = lm, se = FALSE) +
+  labs(title = "Disassociating variables")
+```
+
+
+
+---
+
+`r flipbookr::chunk_reveal('geom_lm_sample_5', title = '### geom_lm_sample')`
+
+```{r geom_lm_sample_5, include = F}
 my_seed <- sample(1:100, 1)
 library(ggplot2)
 ggplot(data = cars) +
@@ -63,9 +118,9 @@ ggplot(data = cars) +
 
 ---
 
-`r flipbookr::chunk_reveal('geom_point_sample_3', title = '### geom_point_sample')`
+`r flipbookr::chunk_reveal('geom_point_sample_6', title = '### geom_point_sample')`
 
-```{r geom_point_sample_3, include = F}
+```{r geom_point_sample_6, include = F}
 # using the function
 set.seed(92389)
 library(ggplot2)
