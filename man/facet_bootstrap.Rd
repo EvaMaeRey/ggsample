@@ -5,7 +5,7 @@
 \title{Resample with replacement}
 \usage{
 facet_bootstrap(
-  n = 9,
+  n_facets = 9,
   prop = 1,
   nrow = NULL,
   ncol = NULL,
@@ -16,7 +16,7 @@ facet_bootstrap(
 )
 }
 \arguments{
-\item{n}{number of facets}
+\item{n_facets}{number of facets}
 
 \item{prop}{numeric proportion to sample, defaults to .2}
 
@@ -45,10 +45,10 @@ ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
   geom_count(alpha = .5) +
-  facet_bootstrap(n = 1) +
-  facet_bootstrap(n = 2) +
-  facet_bootstrap(n = 3) +
+  facet_bootstrap(n_facets = 1) +
+  facet_bootstrap(n_facets = 2) +
+  facet_bootstrap(n_facets = 3) +
   ggxmean::geom_lm() +
   ggxmean::geom_lm_formula() +
-  facet_bootstrap(n = 15)
+  facet_bootstrap(n_facets = 15)
 }

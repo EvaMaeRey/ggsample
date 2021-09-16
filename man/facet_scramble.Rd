@@ -5,7 +5,7 @@
 \title{Title}
 \usage{
 facet_scramble(
-  n = 9,
+  n_facets = 9,
   prop = 1,
   nrow = NULL,
   ncol = NULL,
@@ -16,7 +16,7 @@ facet_scramble(
 )
 }
 \arguments{
-\item{n}{number of facets}
+\item{n_facets}{number of facets}
 
 \item{prop}{numeric proportion to sample, defaults to .2}
 
@@ -40,13 +40,18 @@ Title
 }
 \examples{
 library(ggplot2)
+set.seed(232)
 ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
+  geom_rug() +
   geom_point(color = "springgreen4",
            alpha = .75) +
-  facet_scramble(n = 12) +
-  geom_smooth(method = lm, se = FALSE) +
+  facet_scramble(n_facets = 1) +
+  facet_scramble(n_facets = 2) +
+  facet_scramble(n_facets = 3) +
+  ggxmean::geom_lm() +
+  facet_scramble(n_facets = 12) +
   labs(title = "Disassociating variables")
 
 }

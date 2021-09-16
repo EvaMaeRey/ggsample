@@ -16,13 +16,13 @@
 #'   geom_smooth(method = lm, se = FALSE) +
 #'   facet_sample_prop() +
 #'   labs(title = "Random Sample, 20% of population")
-facet_sample_prop <- function(n = 9, prop = 0.2, nrow = NULL, ncol = NULL,
+facet_sample_prop <- function(n_facets = 9, prop = 0.2, nrow = NULL, ncol = NULL,
                             scales = "fixed", shrink = TRUE, strip.position = "top",
                          seed = sample(2000:3000, 1)) {
 
   facet <- ggplot2::facet_wrap(~.bootstrap, nrow = nrow, ncol = ncol, scales = scales,
                       shrink = shrink, strip.position = strip.position)
-  facet$params$n <- n
+  facet$params$n <- n_facets
   facet$params$prop <- prop
   facet$params$seed <- seed
 

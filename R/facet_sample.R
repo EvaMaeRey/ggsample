@@ -1,6 +1,6 @@
 #' Title
 #'
-#' @param n number of facets
+#' @param n_facets number of facets
 #' @param nrow how many rows for facet grid
 #' @param ncol how many columns for facet grid
 #' @param scales should x and y scales be determined independently for facets
@@ -19,10 +19,10 @@
 #'   aes(x = speed) +
 #'   geom_rug(size = 2, alpha = .5, color = "magenta") +
 #'   ggxmean::geom_x_mean(linetype = "dashed") +
-#'   facet_sample(n = 1, n_sampled = 20) +
-#'   facet_sample(n = 2, n_sampled = 20) +
-#'   facet_sample(n = 3, n_sampled = 20) +
-#'   facet_sample(n = 15, n_sampled = 20) +
+#'   facet_sample(n_facets = 1, n_sampled = 20) +
+#'   facet_sample(n_facets = 2, n_sampled = 20) +
+#'   facet_sample(n_facets = 3, n_sampled = 20) +
+#'   facet_sample(n_facets = 15, n_sampled = 20) +
 #'   ggxmean::geom_x_mean_label()
 #'
 #'
@@ -36,16 +36,17 @@
 #'   ggxmean::geom_lm() +
 #'   labs(caption = "Population are observations from cars correlation study dataset") +
 #'   facet_sample(n_sampled = 8) +
-#'   labs(title = "16 draws, random sample of 8 observations from the population") +
+#'   labs(title =
+#'      "16 draws, each a random sample of 8 observations from the population") +
 #'   labs(subtitle = "Depending on our particular random sample...") +
 #'   ggxmean::geom_lm_formula()
-facet_sample <- function(n = 16, n_sampled = 5, nrow = NULL, ncol = NULL,
+facet_sample <- function(n_facets = 16, n_sampled = 5, nrow = NULL, ncol = NULL,
                          scales = "fixed", shrink = TRUE, strip.position = "top",
                          seed = sample(2000:3000, 1)) {
 
   facet <- ggplot2::facet_wrap(~.bootstrap, nrow = nrow, ncol = ncol, scales = scales,
                                shrink = shrink, strip.position = strip.position)
-  facet$params$n <- n
+  facet$params$n <- n_facets
   facet$params$n_sampled <- n_sampled
   facet$params$seed <- seed
 

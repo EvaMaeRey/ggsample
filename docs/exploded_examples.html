@@ -141,7 +141,7 @@ ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
   geom_count(alpha = .5) +
-* facet_bootstrap(n = 1)
+* facet_bootstrap(n_facets = 1)
 ```
 ]
  
@@ -162,8 +162,8 @@ ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
   geom_count(alpha = .5) +
-  facet_bootstrap(n = 1) +
-* facet_bootstrap(n = 2)
+  facet_bootstrap(n_facets = 1) +
+* facet_bootstrap(n_facets = 2)
 ```
 ]
  
@@ -184,9 +184,9 @@ ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
   geom_count(alpha = .5) +
-  facet_bootstrap(n = 1) +
-  facet_bootstrap(n = 2) +
-* facet_bootstrap(n = 3)
+  facet_bootstrap(n_facets = 1) +
+  facet_bootstrap(n_facets = 2) +
+* facet_bootstrap(n_facets = 3)
 ```
 ]
  
@@ -207,9 +207,9 @@ ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
   geom_count(alpha = .5) +
-  facet_bootstrap(n = 1) +
-  facet_bootstrap(n = 2) +
-  facet_bootstrap(n = 3) +
+  facet_bootstrap(n_facets = 1) +
+  facet_bootstrap(n_facets = 2) +
+  facet_bootstrap(n_facets = 3) +
 * ggxmean::geom_lm()
 ```
 ]
@@ -231,9 +231,9 @@ ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
   geom_count(alpha = .5) +
-  facet_bootstrap(n = 1) +
-  facet_bootstrap(n = 2) +
-  facet_bootstrap(n = 3) +
+  facet_bootstrap(n_facets = 1) +
+  facet_bootstrap(n_facets = 2) +
+  facet_bootstrap(n_facets = 3) +
   ggxmean::geom_lm() +
 * ggxmean::geom_lm_formula()
 ```
@@ -256,12 +256,12 @@ ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
   geom_count(alpha = .5) +
-  facet_bootstrap(n = 1) +
-  facet_bootstrap(n = 2) +
-  facet_bootstrap(n = 3) +
+  facet_bootstrap(n_facets = 1) +
+  facet_bootstrap(n_facets = 2) +
+  facet_bootstrap(n_facets = 3) +
   ggxmean::geom_lm() +
   ggxmean::geom_lm_formula() +
-* facet_bootstrap(n = 15)
+* facet_bootstrap(n_facets = 15)
 ```
 ]
  
@@ -406,7 +406,7 @@ ggplot(data = cars) +
   aes(x = speed) +
   geom_rug(size = 2, alpha = .5, color = "magenta") +
   ggxmean::geom_x_mean(linetype = "dashed") +
-* facet_sample(n = 1, n_sampled = 20)
+* facet_sample(n_facets = 1, n_sampled = 20)
 ```
 ]
  
@@ -427,8 +427,8 @@ ggplot(data = cars) +
   aes(x = speed) +
   geom_rug(size = 2, alpha = .5, color = "magenta") +
   ggxmean::geom_x_mean(linetype = "dashed") +
-  facet_sample(n = 1, n_sampled = 20) +
-* facet_sample(n = 2, n_sampled = 20)
+  facet_sample(n_facets = 1, n_sampled = 20) +
+* facet_sample(n_facets = 2, n_sampled = 20)
 ```
 ]
  
@@ -449,9 +449,9 @@ ggplot(data = cars) +
   aes(x = speed) +
   geom_rug(size = 2, alpha = .5, color = "magenta") +
   ggxmean::geom_x_mean(linetype = "dashed") +
-  facet_sample(n = 1, n_sampled = 20) +
-  facet_sample(n = 2, n_sampled = 20) +
-* facet_sample(n = 3, n_sampled = 20)
+  facet_sample(n_facets = 1, n_sampled = 20) +
+  facet_sample(n_facets = 2, n_sampled = 20) +
+* facet_sample(n_facets = 3, n_sampled = 20)
 ```
 ]
  
@@ -472,10 +472,10 @@ ggplot(data = cars) +
   aes(x = speed) +
   geom_rug(size = 2, alpha = .5, color = "magenta") +
   ggxmean::geom_x_mean(linetype = "dashed") +
-  facet_sample(n = 1, n_sampled = 20) +
-  facet_sample(n = 2, n_sampled = 20) +
-  facet_sample(n = 3, n_sampled = 20) +
-* facet_sample(n = 15, n_sampled = 20)
+  facet_sample(n_facets = 1, n_sampled = 20) +
+  facet_sample(n_facets = 2, n_sampled = 20) +
+  facet_sample(n_facets = 3, n_sampled = 20) +
+* facet_sample(n_facets = 15, n_sampled = 20)
 ```
 ]
  
@@ -496,10 +496,10 @@ ggplot(data = cars) +
   aes(x = speed) +
   geom_rug(size = 2, alpha = .5, color = "magenta") +
   ggxmean::geom_x_mean(linetype = "dashed") +
-  facet_sample(n = 1, n_sampled = 20) +
-  facet_sample(n = 2, n_sampled = 20) +
-  facet_sample(n = 3, n_sampled = 20) +
-  facet_sample(n = 15, n_sampled = 20) +
+  facet_sample(n_facets = 1, n_sampled = 20) +
+  facet_sample(n_facets = 2, n_sampled = 20) +
+  facet_sample(n_facets = 3, n_sampled = 20) +
+  facet_sample(n_facets = 15, n_sampled = 20) +
 * ggxmean::geom_x_mean_label()
 ```
 ]
@@ -739,7 +739,8 @@ ggplot(data = cars) +
   ggxmean::geom_lm() +
   labs(caption = "Population are observations from cars correlation study dataset") +
   facet_sample(n_sampled = 8) +
-* labs(title = "16 draws, random sample of 8 observations from the population")
+* labs(title =
+*    "16 draws, each a random sample of 8 observations from the population")
 ```
 ]
  
@@ -764,8 +765,9 @@ ggplot(data = cars) +
   ggxmean::geom_lm() +
   labs(caption = "Population are observations from cars correlation study dataset") +
   facet_sample(n_sampled = 8) +
-  labs(title = "16 draws, random sample of 8 observations from the population") +
-* labs(subtitle = "Depending on our particular random sample")
+  labs(title =
+     "16 draws, each a random sample of 8 observations from the population") +
+* labs(subtitle = "Depending on our particular random sample...")
 ```
 ]
  
@@ -790,8 +792,9 @@ ggplot(data = cars) +
   ggxmean::geom_lm() +
   labs(caption = "Population are observations from cars correlation study dataset") +
   facet_sample(n_sampled = 8) +
-  labs(title = "16 draws, random sample of 8 observations from the population") +
-  labs(subtitle = "Depending on our particular random sample") +
+  labs(title =
+     "16 draws, each a random sample of 8 observations from the population") +
+  labs(subtitle = "Depending on our particular random sample...") +
 * ggxmean::geom_lm_formula()
 ```
 ]
@@ -1062,12 +1065,12 @@ count: false
 
 ```r
 library(ggplot2)
-*ggplot(data = cars)
+*set.seed(232)
 ```
 ]
  
 .panel2-facet_scramble_5-auto[
-![](exploded_examples_files/figure-html/facet_scramble_5_auto_02_output-1.png)&lt;!-- --&gt;
+
 ]
 
 ---
@@ -1078,8 +1081,8 @@ count: false
 
 ```r
 library(ggplot2)
-ggplot(data = cars) +
-* aes(x = speed)
+set.seed(232)
+*ggplot(data = cars)
 ```
 ]
  
@@ -1095,9 +1098,9 @@ count: false
 
 ```r
 library(ggplot2)
+set.seed(232)
 ggplot(data = cars) +
-  aes(x = speed) +
-* aes(y = dist)
+* aes(x = speed)
 ```
 ]
  
@@ -1113,11 +1116,10 @@ count: false
 
 ```r
 library(ggplot2)
+set.seed(232)
 ggplot(data = cars) +
   aes(x = speed) +
-  aes(y = dist) +
-* geom_point(color = "springgreen4",
-*          alpha = .75)
+* aes(y = dist)
 ```
 ]
  
@@ -1133,12 +1135,11 @@ count: false
 
 ```r
 library(ggplot2)
+set.seed(232)
 ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
-  geom_point(color = "springgreen4",
-           alpha = .75) +
-* facet_scramble(n = 12)
+* geom_rug()
 ```
 ]
  
@@ -1154,13 +1155,13 @@ count: false
 
 ```r
 library(ggplot2)
+set.seed(232)
 ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
-  geom_point(color = "springgreen4",
-           alpha = .75) +
-  facet_scramble(n = 12) +
-* geom_smooth(method = lm, se = FALSE)
+  geom_rug() +
+* geom_point(color = "springgreen4",
+*          alpha = .75)
 ```
 ]
  
@@ -1176,19 +1177,149 @@ count: false
 
 ```r
 library(ggplot2)
+set.seed(232)
 ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
+  geom_rug() +
   geom_point(color = "springgreen4",
            alpha = .75) +
-  facet_scramble(n = 12) +
-  geom_smooth(method = lm, se = FALSE) +
-* labs(title = "Disassociating variables")
+* facet_scramble(n_facets = 1)
 ```
 ]
  
 .panel2-facet_scramble_5-auto[
 ![](exploded_examples_files/figure-html/facet_scramble_5_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_scramble
+.panel1-facet_scramble_5-auto[
+
+```r
+library(ggplot2)
+set.seed(232)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_rug() +
+  geom_point(color = "springgreen4",
+           alpha = .75) +
+  facet_scramble(n_facets = 1) +
+* facet_scramble(n_facets = 2)
+```
+]
+ 
+.panel2-facet_scramble_5-auto[
+![](exploded_examples_files/figure-html/facet_scramble_5_auto_09_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_scramble
+.panel1-facet_scramble_5-auto[
+
+```r
+library(ggplot2)
+set.seed(232)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_rug() +
+  geom_point(color = "springgreen4",
+           alpha = .75) +
+  facet_scramble(n_facets = 1) +
+  facet_scramble(n_facets = 2) +
+* facet_scramble(n_facets = 3)
+```
+]
+ 
+.panel2-facet_scramble_5-auto[
+![](exploded_examples_files/figure-html/facet_scramble_5_auto_10_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_scramble
+.panel1-facet_scramble_5-auto[
+
+```r
+library(ggplot2)
+set.seed(232)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_rug() +
+  geom_point(color = "springgreen4",
+           alpha = .75) +
+  facet_scramble(n_facets = 1) +
+  facet_scramble(n_facets = 2) +
+  facet_scramble(n_facets = 3) +
+* ggxmean::geom_lm()
+```
+]
+ 
+.panel2-facet_scramble_5-auto[
+![](exploded_examples_files/figure-html/facet_scramble_5_auto_11_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_scramble
+.panel1-facet_scramble_5-auto[
+
+```r
+library(ggplot2)
+set.seed(232)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_rug() +
+  geom_point(color = "springgreen4",
+           alpha = .75) +
+  facet_scramble(n_facets = 1) +
+  facet_scramble(n_facets = 2) +
+  facet_scramble(n_facets = 3) +
+  ggxmean::geom_lm() +
+* facet_scramble(n_facets = 12)
+```
+]
+ 
+.panel2-facet_scramble_5-auto[
+![](exploded_examples_files/figure-html/facet_scramble_5_auto_12_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### facet_scramble
+.panel1-facet_scramble_5-auto[
+
+```r
+library(ggplot2)
+set.seed(232)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_rug() +
+  geom_point(color = "springgreen4",
+           alpha = .75) +
+  facet_scramble(n_facets = 1) +
+  facet_scramble(n_facets = 2) +
+  facet_scramble(n_facets = 3) +
+  ggxmean::geom_lm() +
+  facet_scramble(n_facets = 12) +
+* labs(title = "Disassociating variables")
+```
+]
+ 
+.panel2-facet_scramble_5-auto[
+![](exploded_examples_files/figure-html/facet_scramble_5_auto_13_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;

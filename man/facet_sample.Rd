@@ -5,7 +5,7 @@
 \title{Title}
 \usage{
 facet_sample(
-  n = 16,
+  n_facets = 16,
   n_sampled = 5,
   nrow = NULL,
   ncol = NULL,
@@ -16,7 +16,7 @@ facet_sample(
 )
 }
 \arguments{
-\item{n}{number of facets}
+\item{n_facets}{number of facets}
 
 \item{n_sampled}{sample size}
 
@@ -45,10 +45,10 @@ ggplot(data = cars) +
   aes(x = speed) +
   geom_rug(size = 2, alpha = .5, color = "magenta") +
   ggxmean::geom_x_mean(linetype = "dashed") +
-  facet_sample(n = 1, n_sampled = 20) +
-  facet_sample(n = 2, n_sampled = 20) +
-  facet_sample(n = 3, n_sampled = 20) +
-  facet_sample(n = 15, n_sampled = 20) +
+  facet_sample(n_facets = 1, n_sampled = 20) +
+  facet_sample(n_facets = 2, n_sampled = 20) +
+  facet_sample(n_facets = 3, n_sampled = 20) +
+  facet_sample(n_facets = 15, n_sampled = 20) +
   ggxmean::geom_x_mean_label()
 
 
@@ -62,8 +62,8 @@ ggplot(data = cars) +
   ggxmean::geom_lm() +
   labs(caption = "Population are observations from cars correlation study dataset") +
   facet_sample(n_sampled = 8) +
-  labs(title = "16 draws, random sample of 8 observations from the population") +
-  labs(subtitle = "Depending on our particular random sample,
-slopes are flatter or steeper and intercepts vary") +
+  labs(title =
+     "16 draws, each a random sample of 8 observations from the population") +
+  labs(subtitle = "Depending on our particular random sample...") +
   ggxmean::geom_lm_formula()
 }

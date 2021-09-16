@@ -12,19 +12,19 @@
 #'   aes(x = speed) +
 #'   aes(y = dist) +
 #'   geom_count(alpha = .5) +
-#'   facet_bootstrap(n = 1) +
-#'   facet_bootstrap(n = 2) +
-#'   facet_bootstrap(n = 3) +
+#'   facet_bootstrap(n_facets = 1) +
+#'   facet_bootstrap(n_facets = 2) +
+#'   facet_bootstrap(n_facets = 3) +
 #'   ggxmean::geom_lm() +
 #'   ggxmean::geom_lm_formula() +
-#'   facet_bootstrap(n = 15)
-facet_bootstrap <- function(n = 9, prop = 1, nrow = NULL, ncol = NULL,
+#'   facet_bootstrap(n_facets = 15)
+facet_bootstrap <- function(n_facets = 9, prop = 1, nrow = NULL, ncol = NULL,
                             scales = "fixed", shrink = TRUE, strip.position = "top",
                             seed = sample(2000:3000, 1)) {
 
   facet <- ggplot2::facet_wrap(~.bootstrap, nrow = nrow, ncol = ncol, scales = scales,
                       shrink = shrink, strip.position = strip.position)
-  facet$params$n <- n
+  facet$params$n <- n_facets
   facet$params$prop <- prop
   facet$params$seed <- seed
   ggplot2::ggproto(NULL, FacetBootstrap,

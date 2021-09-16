@@ -5,7 +5,7 @@
 \title{Title}
 \usage{
 facet_sample_prop(
-  n = 9,
+  n_facets = 9,
   prop = 0.2,
   nrow = NULL,
   ncol = NULL,
@@ -16,7 +16,7 @@ facet_sample_prop(
 )
 }
 \arguments{
-\item{n}{number of facets}
+\item{n_facets}{number of facets}
 
 \item{prop}{numeric proportion to sample, defaults to .2}
 
