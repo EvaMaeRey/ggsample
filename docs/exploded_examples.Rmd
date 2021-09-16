@@ -30,11 +30,13 @@ set.seed(1323)
 ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
-  geom_point(color = "olivedrab4",
-             alpha = .5) +
-  geom_count(alpha = .2) +
-  facet_bootstrap(n = 12) +
-  geom_smooth(method = lm, se = FALSE)
+  geom_count(alpha = .5) +
+  facet_bootstrap(n = 1) +
+  facet_bootstrap(n = 2) +
+  facet_bootstrap(n = 3) +
+  ggxmean::geom_lm() +
+  ggxmean::geom_lm_formula() +
+  facet_bootstrap(n = 15)
 ```
 
 
@@ -44,27 +46,48 @@ ggplot(data = cars) +
 `r flipbookr::chunk_reveal('facet_sample_2', title = '### facet_sample')`
 
 ```{r facet_sample_2, include = F}
-set.seed(1323)
+# mean from samples
 library(ggplot2)
 ggplot(data = cars) +
   aes(x = speed) +
-  aes(y = dist) +
-  geom_point(color = "olivedrab4") +
-  geom_smooth(method = lm,
-              se = FALSE) +
-  labs(caption = "Population are observations from cars correlation study dataset") +
-  facet_sample(n_sampled = 8) +
-  labs(title = "16 draws, random sample of 8 observations from the population") +
-  labs(subtitle = "Depending on our particular random sample, slopes are flatter or steepernand intercepts vary")
+  geom_rug(size = 2, alpha = .5, color = "magenta") +
+  ggxmean::geom_x_mean(linetype = "dashed") +
+  facet_sample(n = 1, n_sampled = 20) +
+  facet_sample(n = 2, n_sampled = 20) +
+  facet_sample(n = 3, n_sampled = 20) +
+  facet_sample(n = 15, n_sampled = 20) +
+  ggxmean::geom_x_mean_label()
 ```
 
 
 
 ---
 
-`r flipbookr::chunk_reveal('facet_sample_prop_3', title = '### facet_sample_prop')`
+`r flipbookr::chunk_reveal('facet_sample_3', title = '### facet_sample')`
 
-```{r facet_sample_prop_3, include = F}
+```{r facet_sample_3, include = F}
+# linear model from samples
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4") +
+  ggxmean::geom_lm() +
+  labs(caption = "Population are observations from cars correlation study dataset") +
+  facet_sample(n_sampled = 8) +
+  labs(title = "16 draws, random sample of 8 observations from the population") +
+  labs(subtitle = "Depending on our particular random sample") +   
+  ggxmean::geom_lm_formula()
+```
+
+
+
+---
+
+`r flipbookr::chunk_reveal('facet_sample_prop_4', title = '### facet_sample_prop')`
+
+```{r facet_sample_prop_4, include = F}
 set.seed(1323)
 library(ggplot2)
 ggplot(data = cars) +
@@ -80,9 +103,9 @@ ggplot(data = cars) +
 
 ---
 
-`r flipbookr::chunk_reveal('facet_scramble_4', title = '### facet_scramble')`
+`r flipbookr::chunk_reveal('facet_scramble_5', title = '### facet_scramble')`
 
-```{r facet_scramble_4, include = F}
+```{r facet_scramble_5, include = F}
 library(ggplot2)
 ggplot(data = cars) +
   aes(x = speed) +
@@ -98,9 +121,9 @@ ggplot(data = cars) +
 
 ---
 
-`r flipbookr::chunk_reveal('geom_lm_sample_5', title = '### geom_lm_sample')`
+`r flipbookr::chunk_reveal('geom_lm_sample_6', title = '### geom_lm_sample')`
 
-```{r geom_lm_sample_5, include = F}
+```{r geom_lm_sample_6, include = F}
 my_seed <- sample(1:100, 1)
 library(ggplot2)
 ggplot(data = cars) +
@@ -118,9 +141,25 @@ ggplot(data = cars) +
 
 ---
 
-`r flipbookr::chunk_reveal('geom_point_sample_6', title = '### geom_point_sample')`
+`r flipbookr::chunk_reveal('geom_point_lm_sample_7', title = '### geom_point_lm_sample')`
 
-```{r geom_point_sample_6, include = F}
+```{r geom_point_lm_sample_7, include = F}
+my_seed <- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample() +
+  geom_point_lm_sample(color = "darkred")
+```
+
+
+
+---
+
+`r flipbookr::chunk_reveal('geom_point_sample_8', title = '### geom_point_sample')`
+
+```{r geom_point_sample_8, include = F}
 # using the function
 set.seed(92389)
 library(ggplot2)

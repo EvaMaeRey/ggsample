@@ -44,9 +44,11 @@ set.seed(1323)
 ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
-  geom_point(color = "olivedrab4",
-             alpha = .5) +
-  geom_count(alpha = .2) +
-  facet_bootstrap(n = 12) +
-  geom_smooth(method = lm, se = FALSE)
+  geom_count(alpha = .5) +
+  facet_bootstrap(n = 1) +
+  facet_bootstrap(n = 2) +
+  facet_bootstrap(n = 3) +
+  ggxmean::geom_lm() +
+  ggxmean::geom_lm_formula() +
+  facet_bootstrap(n = 15)
 }

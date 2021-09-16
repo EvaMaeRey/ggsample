@@ -39,16 +39,31 @@ a ggplot2 facet specification
 Title
 }
 \examples{
+# mean from samples
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  geom_rug(size = 2, alpha = .5, color = "magenta") +
+  ggxmean::geom_x_mean(linetype = "dashed") +
+  facet_sample(n = 1, n_sampled = 20) +
+  facet_sample(n = 2, n_sampled = 20) +
+  facet_sample(n = 3, n_sampled = 20) +
+  facet_sample(n = 15, n_sampled = 20) +
+  ggxmean::geom_x_mean_label()
+
+
+# linear model from samples
 set.seed(1323)
 library(ggplot2)
 ggplot(data = cars) +
   aes(x = speed) +
   aes(y = dist) +
   geom_point(color = "olivedrab4") +
-  geom_smooth(method = lm,
-              se = FALSE) +
+  ggxmean::geom_lm() +
   labs(caption = "Population are observations from cars correlation study dataset") +
   facet_sample(n_sampled = 8) +
   labs(title = "16 draws, random sample of 8 observations from the population") +
-  labs(subtitle = "Depending on our particular random sample, slopes are flatter or steeper\nand intercepts vary")
+  labs(subtitle = "Depending on our particular random sample,
+slopes are flatter or steeper and intercepts vary") +
+  ggxmean::geom_lm_formula()
 }
