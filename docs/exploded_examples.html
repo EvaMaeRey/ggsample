@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>ggsample</title>
+    <title>Sampling as you Viz</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Exploded Examples" />
+    <meta name="author" content="Gina Reynolds @ Metro NExT Workshop, 9/17" />
     <script src="libs/header-attrs-2.6/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -13,11 +13,56 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# ggsample
-### Exploded Examples
+# Sampling as you Viz
+## introducing {ggsample}
+### Gina Reynolds @ Metro NExT Workshop, 9/17
 
 ---
 
+
+
+
+
+---
+
+# Visualizing concepts is powerful...
+
+--
+
+## True of sampling
+
+---
+
+## Use cool/great GUI tools to do so...
+
+
+
+
+
+
+
+---
+
+# Then, we ask students to do actual analysis in reproducible way with code...
+
+--
+
+## R, Tidyverse, ggplot2 are great tools
+
+
+--
+
+### Remember what we talked about from the GUI applet.  Those principles apply!  
+
+
+--
+
+## To correograph visual sampling experience in R/ggplot2 is currently time consuming, involved...
+
+---
+
+
+# Enter ggsample!
 
 
 
@@ -26,251 +71,110 @@ class: center, middle, inverse, title-slide
 
 count: false
  
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-auto[
 
 ```r
+*my_seed &lt;- sample(1:100, 1)
+```
+]
+ 
+.panel2-geom_point_lm_sample_7-auto[
+
+]
+
+---
+count: false
+ 
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-auto[
+
+```r
+my_seed &lt;- sample(1:100, 1)
 *library(ggplot2)
 ```
 ]
  
-.panel2-facet_bootstrap_1-auto[
+.panel2-geom_point_lm_sample_7-auto[
 
 ]
 
 ---
 count: false
  
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-auto[
 
 ```r
+my_seed &lt;- sample(1:100, 1)
 library(ggplot2)
-*set.seed(1323)
-```
-]
- 
-.panel2-facet_bootstrap_1-auto[
-
-]
-
----
-count: false
- 
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
-
-```r
-library(ggplot2)
-set.seed(1323)
 *ggplot(data = cars)
 ```
 ]
  
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_03_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_lm_sample_7-auto[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-auto[
 
 ```r
+my_seed &lt;- sample(1:100, 1)
 library(ggplot2)
-set.seed(1323)
 ggplot(data = cars) +
-* aes(x = speed)
+* aes(x = speed, y = dist)
 ```
 ]
  
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_04_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_lm_sample_7-auto[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-auto[
 
 ```r
+my_seed &lt;- sample(1:100, 1)
 library(ggplot2)
-set.seed(1323)
 ggplot(data = cars) +
-  aes(x = speed) +
-* aes(y = dist)
+  aes(x = speed, y = dist) +
+* geom_point()
 ```
 ]
  
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_05_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_lm_sample_7-auto[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-auto[
 
 ```r
+my_seed &lt;- sample(1:100, 1)
 library(ggplot2)
-set.seed(1323)
 ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-* geom_count(alpha = .5)
+  aes(x = speed, y = dist) +
+  geom_point() +
+* geom_point_lm_sample(color = "darkred")
 ```
 ]
  
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_06_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
-
-```r
-library(ggplot2)
-set.seed(1323)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(alpha = .5) +
-* facet_bootstrap(n_facets = 1)
-```
-]
- 
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_07_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
-
-```r
-library(ggplot2)
-set.seed(1323)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(alpha = .5) +
-  facet_bootstrap(n_facets = 1) +
-* facet_bootstrap(n_facets = 2)
-```
-]
- 
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_08_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
-
-```r
-library(ggplot2)
-set.seed(1323)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(alpha = .5) +
-  facet_bootstrap(n_facets = 1) +
-  facet_bootstrap(n_facets = 2) +
-* facet_bootstrap(n_facets = 3)
-```
-]
- 
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_09_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
-
-```r
-library(ggplot2)
-set.seed(1323)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(alpha = .5) +
-  facet_bootstrap(n_facets = 1) +
-  facet_bootstrap(n_facets = 2) +
-  facet_bootstrap(n_facets = 3) +
-* ggxmean::geom_lm()
-```
-]
- 
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_10_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
-
-```r
-library(ggplot2)
-set.seed(1323)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(alpha = .5) +
-  facet_bootstrap(n_facets = 1) +
-  facet_bootstrap(n_facets = 2) +
-  facet_bootstrap(n_facets = 3) +
-  ggxmean::geom_lm() +
-* ggxmean::geom_lm_formula()
-```
-]
- 
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_11_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_bootstrap
-.panel1-facet_bootstrap_1-auto[
-
-```r
-library(ggplot2)
-set.seed(1323)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(alpha = .5) +
-  facet_bootstrap(n_facets = 1) +
-  facet_bootstrap(n_facets = 2) +
-  facet_bootstrap(n_facets = 3) +
-  ggxmean::geom_lm() +
-  ggxmean::geom_lm_formula() +
-* facet_bootstrap(n_facets = 15)
-```
-]
- 
-.panel2-facet_bootstrap_1-auto[
-![](exploded_examples_files/figure-html/facet_bootstrap_1_auto_12_output-1.png)&lt;!-- --&gt;
+.panel2-geom_point_lm_sample_7-auto[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-facet_bootstrap_1-auto {
+.panel1-geom_point_lm_sample_7-auto {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -278,7 +182,7 @@ ggplot(data = cars) +
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-facet_bootstrap_1-auto {
+.panel2-geom_point_lm_sample_7-auto {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -286,7 +190,7 @@ ggplot(data = cars) +
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-facet_bootstrap_1-auto {
+.panel3-geom_point_lm_sample_7-auto {
   color: black;
   width: NA%;
   hight: 33%;
@@ -295,6 +199,178 @@ ggplot(data = cars) +
   font-size: 80%
 }
 &lt;/style&gt;
+
+
+
+---
+
+count: false
+ 
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-7[
+
+```r
+my_seed &lt;- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(color = "darkred")
+```
+]
+ 
+.panel2-geom_point_lm_sample_7-7[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_7_01_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-7[
+
+```r
+my_seed &lt;- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(color = "darkred")
+```
+]
+ 
+.panel2-geom_point_lm_sample_7-7[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_7_02_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-7[
+
+```r
+my_seed &lt;- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(color = "darkred")
+```
+]
+ 
+.panel2-geom_point_lm_sample_7-7[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_7_03_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-7[
+
+```r
+my_seed &lt;- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(color = "darkred")
+```
+]
+ 
+.panel2-geom_point_lm_sample_7-7[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_7_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-7[
+
+```r
+my_seed &lt;- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(color = "darkred")
+```
+]
+ 
+.panel2-geom_point_lm_sample_7-7[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_7_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-7[
+
+```r
+my_seed &lt;- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(color = "darkred")
+```
+]
+ 
+.panel2-geom_point_lm_sample_7-7[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_7_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### geom_point_lm_sample
+.panel1-geom_point_lm_sample_7-7[
+
+```r
+my_seed &lt;- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(color = "darkred")
+```
+]
+ 
+.panel2-geom_point_lm_sample_7-7[
+![](exploded_examples_files/figure-html/geom_point_lm_sample_7_7_07_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-geom_point_lm_sample_7-7 {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-geom_point_lm_sample_7-7 {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-geom_point_lm_sample_7-7 {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
 
 
 
@@ -840,211 +916,6 @@ ggplot(data = cars) +
 
 count: false
  
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-*set.seed(1323)
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-
-]
-
----
-count: false
- 
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-set.seed(1323)
-*library(ggplot2)
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-
-]
-
----
-count: false
- 
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-set.seed(1323)
-library(ggplot2)
-*ggplot(data = cars)
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-![](exploded_examples_files/figure-html/facet_sample_prop_4_auto_03_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-set.seed(1323)
-library(ggplot2)
-ggplot(data = cars) +
-* aes(x = speed)
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-![](exploded_examples_files/figure-html/facet_sample_prop_4_auto_04_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-set.seed(1323)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed) +
-* aes(y = dist)
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-![](exploded_examples_files/figure-html/facet_sample_prop_4_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-set.seed(1323)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-* geom_point(color = "olivedrab4")
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-![](exploded_examples_files/figure-html/facet_sample_prop_4_auto_06_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-set.seed(1323)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(color = "olivedrab4") +
-* geom_smooth(method = lm, se = FALSE)
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-![](exploded_examples_files/figure-html/facet_sample_prop_4_auto_07_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-set.seed(1323)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(color = "olivedrab4") +
-  geom_smooth(method = lm, se = FALSE) +
-* facet_sample_prop()
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-![](exploded_examples_files/figure-html/facet_sample_prop_4_auto_08_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### facet_sample_prop
-.panel1-facet_sample_prop_4-auto[
-
-```r
-set.seed(1323)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(color = "olivedrab4") +
-  geom_smooth(method = lm, se = FALSE) +
-  facet_sample_prop() +
-* labs(title = "Random Sample, 20% of population")
-```
-]
- 
-.panel2-facet_sample_prop_4-auto[
-![](exploded_examples_files/figure-html/facet_sample_prop_4_auto_09_output-1.png)&lt;!-- --&gt;
-]
-
-&lt;style&gt;
-.panel1-facet_sample_prop_4-auto {
-  color: black;
-  width: 38.6060606060606%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-facet_sample_prop_4-auto {
-  color: black;
-  width: 59.3939393939394%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-facet_sample_prop_4-auto {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
-
-
-
-
-
-
-
----
-
-count: false
- 
 ### facet_scramble
 .panel1-facet_scramble_5-auto[
 
@@ -1349,546 +1220,6 @@ ggplot(data = cars) +
 }
 &lt;/style&gt;
 
-
-
-
-
-
-
----
-
-count: false
- 
-### geom_lm_sample
-.panel1-geom_lm_sample_6-auto[
-
-```r
-*my_seed &lt;- sample(1:100, 1)
-```
-]
- 
-.panel2-geom_lm_sample_6-auto[
-
-]
-
----
-count: false
- 
-### geom_lm_sample
-.panel1-geom_lm_sample_6-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-*library(ggplot2)
-```
-]
- 
-.panel2-geom_lm_sample_6-auto[
-
-]
-
----
-count: false
- 
-### geom_lm_sample
-.panel1-geom_lm_sample_6-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-*ggplot(data = cars)
-```
-]
- 
-.panel2-geom_lm_sample_6-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_6_auto_03_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_lm_sample
-.panel1-geom_lm_sample_6-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-* aes(x = speed, y = dist)
-```
-]
- 
-.panel2-geom_lm_sample_6-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_6_auto_04_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_lm_sample
-.panel1-geom_lm_sample_6-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-* geom_point()
-```
-]
- 
-.panel2-geom_lm_sample_6-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_6_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_lm_sample
-.panel1-geom_lm_sample_6-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-  geom_point() +
-* geom_smooth(method = lm,
-*            se = FALSE)
-```
-]
- 
-.panel2-geom_lm_sample_6-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_6_auto_06_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_lm_sample
-.panel1-geom_lm_sample_6-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-  geom_point() +
-  geom_smooth(method = lm,
-             se = FALSE) +
-*  geom_point_sample(color = "red",
-*                    seed = my_seed)
-```
-]
- 
-.panel2-geom_lm_sample_6-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_6_auto_07_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_lm_sample
-.panel1-geom_lm_sample_6-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-  geom_point() +
-  geom_smooth(method = lm,
-             se = FALSE) +
-   geom_point_sample(color = "red",
-                     seed = my_seed) +
-*  geom_lm_sample(color = "red",
-*                 seed = my_seed)
-```
-]
- 
-.panel2-geom_lm_sample_6-auto[
-![](exploded_examples_files/figure-html/geom_lm_sample_6_auto_08_output-1.png)&lt;!-- --&gt;
-]
-
-&lt;style&gt;
-.panel1-geom_lm_sample_6-auto {
-  color: black;
-  width: 38.6060606060606%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-geom_lm_sample_6-auto {
-  color: black;
-  width: 59.3939393939394%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-geom_lm_sample_6-auto {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
-
-
-
-
-
-
-
----
-
-count: false
- 
-### geom_point_lm_sample
-.panel1-geom_point_lm_sample_7-auto[
-
-```r
-*my_seed &lt;- sample(1:100, 1)
-```
-]
- 
-.panel2-geom_point_lm_sample_7-auto[
-
-]
-
----
-count: false
- 
-### geom_point_lm_sample
-.panel1-geom_point_lm_sample_7-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-*library(ggplot2)
-```
-]
- 
-.panel2-geom_point_lm_sample_7-auto[
-
-]
-
----
-count: false
- 
-### geom_point_lm_sample
-.panel1-geom_point_lm_sample_7-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-*ggplot(data = cars)
-```
-]
- 
-.panel2-geom_point_lm_sample_7-auto[
-![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_03_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_lm_sample
-.panel1-geom_point_lm_sample_7-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-* aes(x = speed, y = dist)
-```
-]
- 
-.panel2-geom_point_lm_sample_7-auto[
-![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_04_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_lm_sample
-.panel1-geom_point_lm_sample_7-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-* geom_point()
-```
-]
- 
-.panel2-geom_point_lm_sample_7-auto[
-![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_lm_sample
-.panel1-geom_point_lm_sample_7-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-  geom_point() +
-* geom_point_lm_sample()
-```
-]
- 
-.panel2-geom_point_lm_sample_7-auto[
-![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_06_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_lm_sample
-.panel1-geom_point_lm_sample_7-auto[
-
-```r
-my_seed &lt;- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-  geom_point() +
-  geom_point_lm_sample() +
-* geom_point_lm_sample(color = "darkred")
-```
-]
- 
-.panel2-geom_point_lm_sample_7-auto[
-![](exploded_examples_files/figure-html/geom_point_lm_sample_7_auto_07_output-1.png)&lt;!-- --&gt;
-]
-
-&lt;style&gt;
-.panel1-geom_point_lm_sample_7-auto {
-  color: black;
-  width: 38.6060606060606%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-geom_point_lm_sample_7-auto {
-  color: black;
-  width: 59.3939393939394%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-geom_point_lm_sample_7-auto {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
-
-
-
-
-
-
-
----
-
-count: false
- 
-### geom_point_sample
-.panel1-geom_point_sample_8-auto[
-
-```r
-# using the function
-*set.seed(92389)
-```
-]
- 
-.panel2-geom_point_sample_8-auto[
-
-]
-
----
-count: false
- 
-### geom_point_sample
-.panel1-geom_point_sample_8-auto[
-
-```r
-# using the function
-set.seed(92389)
-*library(ggplot2)
-```
-]
- 
-.panel2-geom_point_sample_8-auto[
-
-]
-
----
-count: false
- 
-### geom_point_sample
-.panel1-geom_point_sample_8-auto[
-
-```r
-# using the function
-set.seed(92389)
-library(ggplot2)
-*ggplot(data = cars)
-```
-]
- 
-.panel2-geom_point_sample_8-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_8_auto_03_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_sample
-.panel1-geom_point_sample_8-auto[
-
-```r
-# using the function
-set.seed(92389)
-library(ggplot2)
-ggplot(data = cars) +
-*aes(x = speed, y = dist)
-```
-]
- 
-.panel2-geom_point_sample_8-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_8_auto_04_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_sample
-.panel1-geom_point_sample_8-auto[
-
-```r
-# using the function
-set.seed(92389)
-library(ggplot2)
-ggplot(data = cars) +
- aes(x = speed, y = dist) +
-*geom_point()
-```
-]
- 
-.panel2-geom_point_sample_8-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_8_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_sample
-.panel1-geom_point_sample_8-auto[
-
-```r
-# using the function
-set.seed(92389)
-library(ggplot2)
-ggplot(data = cars) +
- aes(x = speed, y = dist) +
- geom_point() +
-*geom_point_sample(color = "red")
-```
-]
- 
-.panel2-geom_point_sample_8-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_8_auto_06_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_sample
-.panel1-geom_point_sample_8-auto[
-
-```r
-# using the function
-set.seed(92389)
-library(ggplot2)
-ggplot(data = cars) +
- aes(x = speed, y = dist) +
- geom_point() +
- geom_point_sample(color = "red") +
-*geom_point_sample(color = "green",
-*                  sample_size = 5)
-```
-]
- 
-.panel2-geom_point_sample_8-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_8_auto_07_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### geom_point_sample
-.panel1-geom_point_sample_8-auto[
-
-```r
-# using the function
-set.seed(92389)
-library(ggplot2)
-ggplot(data = cars) +
- aes(x = speed, y = dist) +
- geom_point() +
- geom_point_sample(color = "red") +
- geom_point_sample(color = "green",
-                   sample_size = 5) +
-*geom_point_sample(sample_size = 2,
-*                  color = "blue")
-```
-]
- 
-.panel2-geom_point_sample_8-auto[
-![](exploded_examples_files/figure-html/geom_point_sample_8_auto_08_output-1.png)&lt;!-- --&gt;
-]
-
-&lt;style&gt;
-.panel1-geom_point_sample_8-auto {
-  color: black;
-  width: 38.6060606060606%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-geom_point_sample_8-auto {
-  color: black;
-  width: 59.3939393939394%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-geom_point_sample_8-auto {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
 
 
 

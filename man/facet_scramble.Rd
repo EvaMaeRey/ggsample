@@ -47,11 +47,13 @@ ggplot(data = cars) +
   geom_rug() +
   geom_point(color = "springgreen4",
            alpha = .75) +
+  ggxmean:::geom_corrlabel() +
+  labs(subtitle = "Pearson Correlation Coefficient(s)") +
   facet_scramble(n_facets = 1) +
+  labs(title = "Disassociating variables") +
   facet_scramble(n_facets = 2) +
   facet_scramble(n_facets = 3) +
-  ggxmean::geom_lm() +
   facet_scramble(n_facets = 12) +
-  labs(title = "Disassociating variables")
+  ggxmean::geom_lm()
 
 }

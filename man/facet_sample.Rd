@@ -51,7 +51,6 @@ ggplot(data = cars) +
   facet_sample(n_facets = 15, n_sampled = 20) +
   ggxmean::geom_x_mean_label()
 
-
 # linear model from samples
 set.seed(1323)
 library(ggplot2)

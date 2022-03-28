@@ -1,0 +1,101 @@
+---
+title: 'sampling with ggplot2: introducing {ggsample}'
+subtitle: "Metro NY Sept 17"
+author: "Gina Reynolds"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, echo = F}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F, fig.height = 6, comment = "", cache = T)
+options(knitr.duplicate.label = "allow")
+library(ggsample)
+```
+
+
+
+
+---
+
+`r flipbookr::chunk_reveal('geom_point_lm_sample_7', title = '### geom_point_lm_sample')`
+
+`r flipbookr::chunk_reveal('geom_point_lm_sample_7', title = '### geom_point_lm_sample', break_type = 8)`
+
+```{r geom_point_lm_sample_7, include = F}
+my_seed <- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(sample_size = 8,
+                       color = "magenta")
+```
+
+
+
+
+
+
+---
+
+`r flipbookr::chunk_reveal('facet_sample_3', title = '### facet_sample')`
+
+```{r facet_sample_3, include = F}
+# linear model from samples
+set.seed(1323)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_point(color = "olivedrab4") +
+  ggxmean::geom_lm() +
+  labs(caption = "Population are observations from cars correlation study dataset") +
+  facet_sample(n_facets = 1, n_sampled = 20) +
+  facet_sample(n_facets = 2, n_sampled = 20) +
+  facet_sample(n_facets = 3, n_sampled = 20) +
+  facet_sample(n_facets = 15, n_sampled = 20) +
+  facet_sample(n_sampled = 8) +
+  labs(title =
+     "16 draws, each a random sample of 8 observations from the population") +
+  labs(subtitle = "Depending on our particular random sample...") +
+  ggxmean::geom_lm_formula()
+```
+
+
+
+---
+
+`r flipbookr::chunk_reveal('facet_scramble_5', title = '### facet_scramble')`
+
+```{r facet_scramble_5, include = F}
+library(ggplot2)
+set.seed(232)
+ggplot(data = cars) +
+  aes(x = speed) +
+  aes(y = dist) +
+  geom_rug() +
+  geom_point(color = "springgreen4",
+           alpha = .75) +
+  ggxmean:::geom_corrlabel() +
+  labs(subtitle = "Pearson Correlation Coefficient(s)") +
+  facet_scramble(n_facets = 1) +
+  labs(title = "Disassociating variables") +
+  facet_scramble(n_facets = 2) +
+  facet_scramble(n_facets = 3) +
+  facet_scramble(n_facets = 12) +
+  ggxmean::geom_lm()
+```
+
+---
+
+```{r}
+knitr::include_graphics("ggsample_hex.mp4")
+```
+

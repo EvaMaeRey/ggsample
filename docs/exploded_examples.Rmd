@@ -1,7 +1,7 @@
 ---
-title: ggsample
-subtitle: ""
-author: "Exploded Examples"
+title: "Sampling as you Viz"
+subtitle: "introducing {ggsample}"
+author: "Gina Reynolds @ Metro NExT Workshop, 9/17"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -14,7 +14,7 @@ output:
 ---
 
 ```{r setup, echo = F}
-knitr::opts_chunk$set(echo = TRUE, message = F, warning = F, fig.height = 6, comment = "")
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F, fig.height = 6, comment = "", c)
 options(knitr.duplicate.label = "allow")
 library(ggsample)
 ```
@@ -22,22 +22,68 @@ library(ggsample)
 
 ---
 
-`r flipbookr::chunk_reveal('facet_bootstrap_1', title = '### facet_bootstrap')`
+# Visualizing concepts is powerful...
 
-```{r facet_bootstrap_1, include = F}
-library(ggplot2)
-set.seed(1323)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(alpha = .5) +
-  facet_bootstrap(n_facets = 1) +
-  facet_bootstrap(n_facets = 2) +
-  facet_bootstrap(n_facets = 3) +
-  ggxmean::geom_lm() +
-  ggxmean::geom_lm_formula() +
-  facet_bootstrap(n_facets = 15)
+--
+
+## True of sampling
+
+---
+
+## Use cool/great GUI tools to do so...
+
+
+
+```{r, echo = F}
+# knitr::include_graphics("applet.png")
 ```
+
+
+
+---
+
+# Then, we ask students to do actual analysis in reproducible way with code...
+
+--
+
+## R, Tidyverse, ggplot2 are great tools
+
+
+--
+
+### Remember what we talked about from the GUI applet.  Those principles apply!  
+
+
+--
+
+## To correograph visual sampling experience in R/ggplot2 is currently time consuming, involved...
+
+---
+
+
+# Enter ggsample!
+
+
+
+
+---
+
+`r flipbookr::chunk_reveal('geom_point_lm_sample_7', title = '### geom_point_lm_sample')`
+
+---
+
+`r flipbookr::chunk_reveal('geom_point_lm_sample_7', title = '### geom_point_lm_sample', break_type = 7)`
+
+```{r geom_point_lm_sample_7, include = F}
+my_seed <- sample(1:100, 1)
+library(ggplot2)
+ggplot(data = cars) +
+  aes(x = speed, y = dist) +
+  geom_point() +
+  geom_point_lm_sample(color = "darkred")
+```
+
+
 
 
 
@@ -86,24 +132,6 @@ ggplot(data = cars) +
 
 ---
 
-`r flipbookr::chunk_reveal('facet_sample_prop_4', title = '### facet_sample_prop')`
-
-```{r facet_sample_prop_4, include = F}
-set.seed(1323)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(color = "olivedrab4") +
-  geom_smooth(method = lm, se = FALSE) +
-  facet_sample_prop() +
-  labs(title = "Random Sample, 20% of population")
-```
-
-
-
----
-
 `r flipbookr::chunk_reveal('facet_scramble_5', title = '### facet_scramble')`
 
 ```{r facet_scramble_5, include = F}
@@ -123,60 +151,5 @@ ggplot(data = cars) +
   labs(title = "Disassociating variables")
 ```
 
-
-
----
-
-`r flipbookr::chunk_reveal('geom_lm_sample_6', title = '### geom_lm_sample')`
-
-```{r geom_lm_sample_6, include = F}
-my_seed <- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-  geom_point() +
-  geom_smooth(method = lm,
-             se = FALSE) +
-   geom_point_sample(color = "red",
-                     seed = my_seed) +
-   geom_lm_sample(color = "red",
-                  seed = my_seed)
-```
-
-
-
----
-
-`r flipbookr::chunk_reveal('geom_point_lm_sample_7', title = '### geom_point_lm_sample')`
-
-```{r geom_point_lm_sample_7, include = F}
-my_seed <- sample(1:100, 1)
-library(ggplot2)
-ggplot(data = cars) +
-  aes(x = speed, y = dist) +
-  geom_point() +
-  geom_point_lm_sample() +
-  geom_point_lm_sample(color = "darkred")
-```
-
-
-
----
-
-`r flipbookr::chunk_reveal('geom_point_sample_8', title = '### geom_point_sample')`
-
-```{r geom_point_sample_8, include = F}
-# using the function
-set.seed(92389)
-library(ggplot2)
-ggplot(data = cars) +
- aes(x = speed, y = dist) +
- geom_point() +
- geom_point_sample(color = "red") +
- geom_point_sample(color = "green",
-                   sample_size = 5) +
- geom_point_sample(sample_size = 2,
-                   color = "blue")
-```
 
 
