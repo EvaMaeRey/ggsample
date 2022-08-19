@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — facet_sample_prop • ggsample</title>
+<title>Title — compute_group_scramble • ggsample</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Title — facet_sample_prop" />
+<meta property="og:title" content="Title — compute_group_scramble" />
 <meta property="og:description" content="Title" />
 <meta name="twitter:card" content="summary" />
 
@@ -102,58 +102,21 @@
     <div class="page-header">
     <h1>Title</h1>
     
-    <div class="hidden name"><code>facet_sample_prop.Rd</code></div>
+    <div class="hidden name"><code>compute_group_scramble.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Title</p>
     </div>
 
-    <pre class="usage"><span class='fu'>facet_sample_prop</span>(
-  <span class='kw'>n_facets</span> <span class='kw'>=</span> <span class='fl'>9</span>,
-  <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
-  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"fixed"</span>,
-  <span class='kw'>shrink</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>strip.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
-  <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>2000</span>:<span class='fl'>3000</span>, <span class='fl'>1</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>compute_group_scramble</span>(<span class='no'>data</span>, <span class='no'>scales</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>n_facets</th>
-      <td><p>number of facets</p></td>
-    </tr>
-    <tr>
-      <th>prop</th>
-      <td><p>numeric proportion to sample, defaults to .2</p></td>
-    </tr>
-    <tr>
-      <th>nrow</th>
-      <td><p>how many rows for facet grid</p></td>
-    </tr>
-    <tr>
-      <th>ncol</th>
-      <td><p>how many columns for facet grid</p></td>
-    </tr>
-    <tr>
-      <th>scales</th>
-      <td><p>should x and y scales be determined independently for facets</p></td>
-    </tr>
-    <tr>
-      <th>shrink</th>
-      <td><p>not sure what shrink does</p></td>
-    </tr>
-    <tr>
-      <th>strip.position</th>
-      <td><p>where facet label should go</p></td>
-    </tr>
-    <tr>
       <th>seed</th>
-      <td><p>randomization start point</p></td>
+      <td></td>
     </tr>
     </table>
 
@@ -164,15 +127,9 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1323</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>cars</span>) +
-  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>speed</span>) +
-  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>dist</span>) +
-  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_point.html'>geom_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"olivedrab4"</span>) +
-  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_smooth.html'>geom_smooth</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>lm</span>, <span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
-  <span class='fu'>facet_sample_prop</span>() +
-  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>labs</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Random Sample, 20% of population"</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using formula 'y ~ x'</span></div><div class='img'><img src='facet_sample_prop-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='no'>cars</span> <span class='kw'>%&gt;%</span>
+<span class='fu'>rename</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>speed</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>dist</span>) <span class='kw'>%&gt;%</span>
+<span class='fu'>compute_group_scramble</span>()</div><div class='output co'>#&gt; <span class='error'>Error in cars %&gt;% rename(x = speed, y = dist) %&gt;% compute_group_scramble(): could not find function "%&gt;%"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

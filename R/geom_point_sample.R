@@ -25,12 +25,12 @@
 #'                    color = "blue")
 #'
 geom_point_sample <- function(mapping = NULL,
-                                data = NULL,
-                                position = "identity",
-                                na.rm = FALSE,
-                                show.legend = NA,
-                                inherit.aes = TRUE,
-                                ...) {
+                              data = NULL,
+                              position = "identity",
+                              na.rm = FALSE,
+                              show.legend = NA,
+                              inherit.aes = TRUE,
+                              ...) {
 
   message("Default sample_size is 10")
 
@@ -59,7 +59,7 @@ StatSamplepoint <- ggplot2::ggproto(
     data[sample(1:nrow(data),
                 size = sample_size,
                 replace = F),
-         ]
+    ]
 
   },
 
