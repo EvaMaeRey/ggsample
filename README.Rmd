@@ -104,7 +104,28 @@ ggplot(data = mtcars) +
    geom_smooth(method = lm, se = F) 
 ```
 
-# Functions... 
+# Single realization: facet_*(n_facets = 1)
+
+You can use facet_*(n_facets = 1) to see a single realization.  In a classroom setting you can reexecute code to see multiple realizations one at a time.  last_plot() does *not* produce a fresh sample; but overriding facet_sample does work.
+
+I wonder if some helpers might be nice like facet_sample_once() for this special case. 
+
+
+```{r}
+ggplot(data = mtcars) +
+   aes(x = wt) +
+   aes(y = mpg) +
+   facet_sample(n_sampled = 10, 
+                n_facets = 1) +
+   geom_point(alpha = .5) +
+   geom_smooth(method = lm, se = F)
+
+last_plot() + facet_sample(n_sampled = 10, n_facets = 1)
+```
+
+
+
+# Functions internals...
 
 
 Here, you'll see a lot of cloned code from the ggplot2 extension vignette!   https://github.com/tidyverse/ggplot2/blob/5f518d02af27160ab98fed736a472321d72d10d2/vignettes/extending-ggplot2.Rmd#L1028  The small contribution made here is the seed parameter which seems to have worked. 
@@ -215,7 +236,6 @@ ggplot(data = mtcars) +
                 nrow = 3) +
    geom_point(alpha = .5) +
    geom_smooth(method = lm, se = F)
-  labs(subtitle = "Depending on our particular random sample...")
 
 ```
 

@@ -117,7 +117,38 @@ ggplot(data = mtcars) +
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-# Functions…
+# Single realization: facet\_\*(n\_facets = 1)
+
+You can use facet\_*(n\_facets = 1) to see a single realization. In a
+classroom setting you can reexecute code to see multiple realizations
+one at a time. last\_plot() does *not\* produce a fresh sample; but
+overriding facet\_sample does work.
+
+I wonder if some helpers might be nice like facet\_sample\_once() for
+this special case.
+
+``` r
+ggplot(data = mtcars) +
+   aes(x = wt) +
+   aes(y = mpg) +
+   facet_sample(n_sampled = 10, 
+                n_facets = 1) +
+   geom_point(alpha = .5) +
+   geom_smooth(method = lm, se = F)
+#> `geom_smooth()` using formula = 'y ~ x'
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+``` r
+
+last_plot() + facet_sample(n_sampled = 10, n_facets = 1)
+#> `geom_smooth()` using formula = 'y ~ x'
+```
+
+<img src="man/figures/README-unnamed-chunk-5-2.png" width="100%" />
+
+# Functions internals…
 
 Here, you’ll see a lot of cloned code from the ggplot2 extension
 vignette\!
@@ -234,16 +265,7 @@ ggplot(data = mtcars) +
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
-
-``` r
-  labs(subtitle = "Depending on our particular random sample...")
-#> $subtitle
-#> [1] "Depending on our particular random sample..."
-#> 
-#> attr(,"class")
-#> [1] "labels"
-```
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 ### facet\_sample\_prop()
 
@@ -317,7 +339,7 @@ ggplot(data = mtcars) +
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 ### facet\_bootstrap()
 
@@ -390,7 +412,7 @@ ggplot(data = mtcars) +
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 ### facet\_scramble
 
@@ -480,7 +502,7 @@ ggplot(data = mtcars) +
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 ## Send to R dir
 
