@@ -18,16 +18,14 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ggsample provide functions for sampling.  The facet_* functions could be especially statistical education in helping visualize hypothetical scenarios (like sampling from known population) or demonstating resampling techniques.  The facet_* functions mostly borrow from the ggplot2 extension vignette [(extending existing facet function)](https://github.com/tidyverse/ggplot2/blob/5f518d02af27160ab98fed736a472321d72d10d2/vignettes/extending-ggplot2.Rmd#L1028), but do add a seed setting move, such that the layers in each facet are looking at the same sampling frame; i.e. points plotted would be the same data that an lm is estimated on.  This which didn't seem to be the case when only using the vignette strategy. They are:
+The goal of ggsample provide functions for sampling.  The facet_* functions could be especially statistical education in helping visualize hypothetical scenarios (like sampling from known population) or demonstrating resampling techniques.  The facet_* functions mostly borrow from the ggplot2 extension vignette [(extending existing facet function)](https://github.com/tidyverse/ggplot2/blob/5f518d02af27160ab98fed736a472321d72d10d2/vignettes/extending-ggplot2.Rmd#L1028). But a seed setting move has been added such that the layers in each facet are looking at the same sampling frame; i.e. geom_smooth() will be acting on the same data as geom_point() points   This which didn't seem to be the case when only using the vignette strategy as-is. The functions are:
 
-- facet_sample
-- facet_sample_prop
-- facet_bootstrap
-- facet_scramble
+- `facet_sample()`
+- `facet_sample_prop()`
+- `facet_bootstrap()`
+- `facet_scramble()`
 
 There are also some geom experiments, which I think might be less useful.
-
-
 
 ## Installation
 
@@ -47,7 +45,7 @@ devtools::install_github("EvaMaeRey/ggsample")
 
 Below we display 9 panels with different a sample of 10 observations taken.
 
-```{r example}
+```{r example, eval = T}
 library(ggplot2)
 library(ggsample)
 
@@ -64,7 +62,7 @@ ggplot(data = mtcars) +
 
 We can also sample by specifying a proportion with facet_sample_prop().
 
-```{r}
+```{r, eval = T}
 # facet_sample_prop
 ggplot(data = mtcars) +
    aes(x = wt) +
@@ -80,7 +78,7 @@ ggplot(data = mtcars) +
 We can also bootstrap taking a sample of nrow(data) with replacement via facet_bootstrap().
 
 
-```{r}
+```{r , eval = T}
 # facet_bootstrap
 ggplot(data = mtcars) +
    aes(x = wt) +
@@ -93,7 +91,7 @@ ggplot(data = mtcars) +
 
 Looking at disassociated data is also possible via facet_scramble().
 
-```{r}
+```{r, eval = T}
 # facet_scramble
 ggplot(data = mtcars) +
    aes(x = wt) +
@@ -106,7 +104,7 @@ ggplot(data = mtcars) +
 
 # Single realization: facet_*(n_facets = 1)
 
-You can use facet_*(n_facets = 1) to see a single realization.  In a classroom setting you can reexecute code to see multiple realizations one at a time.  last_plot() does *not* produce a fresh sample; but overriding facet_sample does work.
+You can use facet_*(n_facets = 1) to see a single realization.  In a classroom setting you can re-execute code to see multiple realizations one at a time.  last_plot() does *not* produce a fresh sample; but overriding facet_sample does work.
 
 I wonder if some helpers might be nice like facet_sample_once() for this special case. 
 
@@ -128,11 +126,61 @@ last_plot() + facet_sample(n_sampled = 10, n_facets = 1)
 # Functions internals...
 
 
-Here, you'll see a lot of cloned code from the ggplot2 extension vignette!   https://github.com/tidyverse/ggplot2/blob/5f518d02af27160ab98fed736a472321d72d10d2/vignettes/extending-ggplot2.Rmd#L1028  The small contribution made here is the seed parameter which seems to have worked. 
+Here, you'll see a lot of cloned code from the ggplot2 extension vignette!   https://github.com/tidyverse/ggplot2/blob/5f518d02af27160ab98fed736a472321d72d10d2/vignettes/extending-ggplot2.Rmd#L1028  The small contribution made here is the seed parameter which, ensures that layers are displayed based on the same sample (geom_smooth reflects the same data as geom_point) which seems to have worked. 
 
 There is a lot of repetition in what's below and it might be good to try to consolidate some of this at some point. 
 
+```{r a_compute_layout_sample}
+compute_layout_sample <- function(data, params) {
+  
+      id     <- seq_len(params$n)
+      dims   <- wrap_dims(params$n, params$nrow, params$ncol)
+      layout <- data.frame(PANEL = factor(id))
+
+      if (params$as.table) { layout$ROW <- as.integer((id - 1L) %/% dims[2] + 1L)
+      } else {               layout$ROW <- as.integer(dims[1] - (id - 1L) %/% dims[2]) }
+      
+                             layout$COL <- as.integer((id - 1L) %% dims[2] + 1L)
+
+      layout <- layout[order(layout$PANEL), , drop = FALSE]
+                                  
+      rownames(layout) <- NULL
+
+      # Add scale identification
+      layout$SCALE_X <- if (params$free$x) id else 1L
+      layout$SCALE_Y <- if (params$free$y) id else 1L
+
+      cbind(layout, .bootstrap = id)
+      
+      }
+```
+
+
 ```{r facet_sample}
+
+
+map_data_sample <- function(data, layout, params) {
+  
+      if (is.null(data) || nrow(data) == 0) {return(cbind(data, PANEL = integer(0)))}
+                                  
+      set.seed(params$seed) # adding this
+                                  
+      n_sampled <- params$n_sampled
+      
+      new_data <- lapply(seq_len(params$n), function(i) {
+        cbind(data[sample(nrow(data), n_sampled), , drop = FALSE], PANEL = i)
+                                  })
+      do.call(rbind, new_data)
+                                
+      }
+
+FacetSample <- ggplot2::ggproto(
+  `_class`   = "FacetSample", 
+  `_inherit` = ggplot2::FacetWrap,
+  compute_layout = compute_layout_sample,
+  map_data = map_data_sample
+)
+
 #' Title
 #'
 #' @param n_facets number of facets
@@ -165,62 +213,19 @@ facet_sample <- function(n_facets = 16, n_sampled = 5, nrow = NULL, ncol = NULL,
 
   facet <- ggplot2::facet_wrap(~.bootstrap, nrow = nrow, ncol = ncol, scales = scales,
                                shrink = shrink, strip.position = strip.position)
+  
   facet$params$n <- n_facets
   facet$params$n_sampled <- n_sampled
   facet$params$seed <- seed
 
-  ggplot2::ggproto(NULL, FacetSample,
+  ggplot2::ggproto(`_class` = NULL, 
+                   `_inherit` = FacetSample,
                    shrink = shrink,
-                   params = facet$params
-  )
+                   params = facet$params)
+  
 }
 
 
-compute_layout_sample <- function(data, params) {
-  
-      id     <- seq_len(params$n)
-      dims   <- wrap_dims(params$n, params$nrow, params$ncol)
-      layout <- data.frame(PANEL = factor(id))
-
-      if (params$as.table) { layout$ROW <- as.integer((id - 1L) %/% dims[2] + 1L)
-      } else {               layout$ROW <- as.integer(dims[1] - (id - 1L) %/% dims[2]) }
-      
-                             layout$COL <- as.integer((id - 1L) %% dims[2] + 1L)
-
-      layout <- layout[order(layout$PANEL), , drop = FALSE]
-                                  
-      rownames(layout) <- NULL
-
-      # Add scale identification
-      layout$SCALE_X <- if (params$free$x) id else 1L
-      layout$SCALE_Y <- if (params$free$y) id else 1L
-
-      cbind(layout, .bootstrap = id)
-      
-      }
-
-
-map_data_sample <- function(data, layout, params) {
-  
-      if (is.null(data) || nrow(data) == 0) {return(cbind(data, PANEL = integer(0)))}
-                                  
-      set.seed(params$seed) # adding this
-                                  
-      n_sampled <- params$n_sampled
-      
-      new_data <- lapply(seq_len(params$n), function(i) {
-        cbind(data[sample(nrow(data), n_sampled), , drop = FALSE], PANEL = i)
-                                  })
-      do.call(rbind, new_data)
-                                
-      }
-
-FacetSample <- ggplot2::ggproto(
-  `_class`   = "FacetSample", 
-  `_inherit` = ggplot2::FacetWrap,
-  compute_layout = compute_layout_sample,
-  map_data       = map_data_sample
-)
 
 ```
 
@@ -483,8 +488,10 @@ ggplot(data = mtcars) +
 
 
 ```{r}
-readme2pkg::chunk_to_r("facet_sample")
-readme2pkg::chunk_to_r("facet_sample_prop")
-readme2pkg::chunk_to_r("facet_bootstrap")
-readme2pkg::chunk_to_r("facet_scramble")
+library(tidyverse)
+knitrExtra:::chunk_to_r("a_compute_layout_sample")
+knitrExtra:::chunk_to_r("facet_sample")
+knitrExtra:::chunk_to_r("facet_sample_prop")
+knitrExtra:::chunk_to_r("facet_bootstrap")
+knitrExtra:::chunk_to_r("facet_scramble")
 ```

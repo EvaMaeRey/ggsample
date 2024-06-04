@@ -10,18 +10,19 @@
 The goal of ggsample provide functions for sampling. The facet\_\*
 functions could be especially statistical education in helping visualize
 hypothetical scenarios (like sampling from known population) or
-demonstating resampling techniques. The facet\_\* functions mostly
+demonstrating resampling techniques. The facet\_\* functions mostly
 borrow from the ggplot2 extension vignette [(extending existing facet
-function)](https://github.com/tidyverse/ggplot2/blob/5f518d02af27160ab98fed736a472321d72d10d2/vignettes/extending-ggplot2.Rmd#L1028),
-but do add a seed setting move, such that the layers in each facet are
-looking at the same sampling frame; i.e. points plotted would be the
-same data that an lm is estimated on. This which didn’t seem to be the
-case when only using the vignette strategy. They are:
+function)](https://github.com/tidyverse/ggplot2/blob/5f518d02af27160ab98fed736a472321d72d10d2/vignettes/extending-ggplot2.Rmd#L1028).
+But a seed setting move has been added such that the layers in each
+facet are looking at the same sampling frame; i.e. geom\_smooth() will
+be acting on the same data as geom\_point() points This which didn’t
+seem to be the case when only using the vignette strategy as-is. The
+functions are:
 
-  - facet\_sample
-  - facet\_sample\_prop
-  - facet\_bootstrap
-  - facet\_scramble
+  - `facet_sample()`
+  - `facet_sample_prop()`
+  - `facet_bootstrap()`
+  - `facet_scramble()`
 
 There are also some geom experiments, which I think might be less
 useful.
@@ -120,7 +121,7 @@ ggplot(data = mtcars) +
 # Single realization: facet\_\*(n\_facets = 1)
 
 You can use facet\_*(n\_facets = 1) to see a single realization. In a
-classroom setting you can reexecute code to see multiple realizations
+classroom setting you can re-execute code to see multiple realizations
 one at a time. last\_plot() does *not\* produce a fresh sample; but
 overriding facet\_sample does work.
 
@@ -153,13 +154,63 @@ last_plot() + facet_sample(n_sampled = 10, n_facets = 1)
 Here, you’ll see a lot of cloned code from the ggplot2 extension
 vignette\!
 <https://github.com/tidyverse/ggplot2/blob/5f518d02af27160ab98fed736a472321d72d10d2/vignettes/extending-ggplot2.Rmd#L1028>
-The small contribution made here is the seed parameter which seems to
-have worked.
+The small contribution made here is the seed parameter which, ensures
+that layers are displayed based on the same sample (geom\_smooth
+reflects the same data as geom\_point) which seems to have worked.
 
 There is a lot of repetition in what’s below and it might be good to try
 to consolidate some of this at some point.
 
 ``` r
+compute_layout_sample <- function(data, params) {
+  
+      id     <- seq_len(params$n)
+      dims   <- wrap_dims(params$n, params$nrow, params$ncol)
+      layout <- data.frame(PANEL = factor(id))
+
+      if (params$as.table) { layout$ROW <- as.integer((id - 1L) %/% dims[2] + 1L)
+      } else {               layout$ROW <- as.integer(dims[1] - (id - 1L) %/% dims[2]) }
+      
+                             layout$COL <- as.integer((id - 1L) %% dims[2] + 1L)
+
+      layout <- layout[order(layout$PANEL), , drop = FALSE]
+                                  
+      rownames(layout) <- NULL
+
+      # Add scale identification
+      layout$SCALE_X <- if (params$free$x) id else 1L
+      layout$SCALE_Y <- if (params$free$y) id else 1L
+
+      cbind(layout, .bootstrap = id)
+      
+      }
+```
+
+``` r
+
+
+map_data_sample <- function(data, layout, params) {
+  
+      if (is.null(data) || nrow(data) == 0) {return(cbind(data, PANEL = integer(0)))}
+                                  
+      set.seed(params$seed) # adding this
+                                  
+      n_sampled <- params$n_sampled
+      
+      new_data <- lapply(seq_len(params$n), function(i) {
+        cbind(data[sample(nrow(data), n_sampled), , drop = FALSE], PANEL = i)
+                                  })
+      do.call(rbind, new_data)
+                                
+      }
+
+FacetSample <- ggplot2::ggproto(
+  `_class`   = "FacetSample", 
+  `_inherit` = ggplot2::FacetWrap,
+  compute_layout = compute_layout_sample,
+  map_data = map_data_sample
+)
+
 #' Title
 #'
 #' @param n_facets number of facets
@@ -192,62 +243,17 @@ facet_sample <- function(n_facets = 16, n_sampled = 5, nrow = NULL, ncol = NULL,
 
   facet <- ggplot2::facet_wrap(~.bootstrap, nrow = nrow, ncol = ncol, scales = scales,
                                shrink = shrink, strip.position = strip.position)
+  
   facet$params$n <- n_facets
   facet$params$n_sampled <- n_sampled
   facet$params$seed <- seed
 
-  ggplot2::ggproto(NULL, FacetSample,
+  ggplot2::ggproto(`_class` = NULL, 
+                   `_inherit` = FacetSample,
                    shrink = shrink,
-                   params = facet$params
-  )
+                   params = facet$params)
+  
 }
-
-
-compute_layout_sample <- function(data, params) {
-  
-      id     <- seq_len(params$n)
-      dims   <- wrap_dims(params$n, params$nrow, params$ncol)
-      layout <- data.frame(PANEL = factor(id))
-
-      if (params$as.table) { layout$ROW <- as.integer((id - 1L) %/% dims[2] + 1L)
-      } else {               layout$ROW <- as.integer(dims[1] - (id - 1L) %/% dims[2]) }
-      
-                             layout$COL <- as.integer((id - 1L) %% dims[2] + 1L)
-
-      layout <- layout[order(layout$PANEL), , drop = FALSE]
-                                  
-      rownames(layout) <- NULL
-
-      # Add scale identification
-      layout$SCALE_X <- if (params$free$x) id else 1L
-      layout$SCALE_Y <- if (params$free$y) id else 1L
-
-      cbind(layout, .bootstrap = id)
-      
-      }
-
-
-map_data_sample <- function(data, layout, params) {
-  
-      if (is.null(data) || nrow(data) == 0) {return(cbind(data, PANEL = integer(0)))}
-                                  
-      set.seed(params$seed) # adding this
-                                  
-      n_sampled <- params$n_sampled
-      
-      new_data <- lapply(seq_len(params$n), function(i) {
-        cbind(data[sample(nrow(data), n_sampled), , drop = FALSE], PANEL = i)
-                                  })
-      do.call(rbind, new_data)
-                                
-      }
-
-FacetSample <- ggplot2::ggproto(
-  `_class`   = "FacetSample", 
-  `_inherit` = ggplot2::FacetWrap,
-  compute_layout = compute_layout_sample,
-  map_data       = map_data_sample
-)
 ```
 
 ### try it out
@@ -507,8 +513,24 @@ ggplot(data = mtcars) +
 ## Send to R dir
 
 ``` r
-readme2pkg::chunk_to_r("facet_sample")
-readme2pkg::chunk_to_r("facet_sample_prop")
-readme2pkg::chunk_to_r("facet_bootstrap")
-readme2pkg::chunk_to_r("facet_scramble")
+library(tidyverse)
+#> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+#> ✔ dplyr     1.1.4     ✔ readr     2.1.5
+#> ✔ forcats   1.0.0     ✔ stringr   1.5.1
+#> ✔ lubridate 1.9.3     ✔ tibble    3.2.1
+#> ✔ purrr     1.0.2     ✔ tidyr     1.3.1
+#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#> ✖ dplyr::filter() masks stats::filter()
+#> ✖ dplyr::lag()    masks stats::lag()
+#> ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+knitrExtra:::chunk_to_r("a_compute_layout_sample")
+#> It seems you are currently knitting a Rmd/Qmd file. The parsing of the file will be done in a new R session.
+knitrExtra:::chunk_to_r("facet_sample")
+#> It seems you are currently knitting a Rmd/Qmd file. The parsing of the file will be done in a new R session.
+knitrExtra:::chunk_to_r("facet_sample_prop")
+#> It seems you are currently knitting a Rmd/Qmd file. The parsing of the file will be done in a new R session.
+knitrExtra:::chunk_to_r("facet_bootstrap")
+#> It seems you are currently knitting a Rmd/Qmd file. The parsing of the file will be done in a new R session.
+knitrExtra:::chunk_to_r("facet_scramble")
+#> It seems you are currently knitting a Rmd/Qmd file. The parsing of the file will be done in a new R session.
 ```
