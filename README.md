@@ -46,8 +46,8 @@ devtools::install_github("EvaMaeRey/ggsample")
 
 ## Examples
 
-Below we display 9 panels with different a sample of 10 observations
-taken.
+Below we display 9 panels with different a sample of 16 (n\_facets
+default) observations taken.
 
 ``` r
 library(ggplot2)
@@ -57,9 +57,7 @@ library(ggsample)
 ggplot(data = mtcars) +
    aes(x = wt) +
    aes(y = mpg) +
-   facet_sample(n_sampled = 10, 
-                n_facets = 9,
-                nrow = 3) +
+   facet_sample(n_sampled = 10) +
    geom_point(alpha = .5) +
    geom_smooth(method = lm, se = F)
 #> `geom_smooth()` using formula = 'y ~ x'
@@ -76,8 +74,7 @@ ggplot(data = mtcars) +
    aes(x = wt) +
    aes(y = mpg) +
    facet_sample_prop(prop = .2, 
-                n_facets = 9,
-                nrow = 3) +
+                n_facets = 9) +
    geom_point(alpha = .5) +
    geom_smooth(method = lm, se = F)
 #> `geom_smooth()` using formula = 'y ~ x'
@@ -93,8 +90,7 @@ facet\_bootstrap().
 ggplot(data = mtcars) +
    aes(x = wt) +
    aes(y = mpg) +
-   facet_bootstrap(n_facets = 9,
-                   nrow = 3) +
+   facet_bootstrap() +
    geom_count(alpha = .2) +
    geom_smooth(method = lm, se = F) 
 #> `geom_smooth()` using formula = 'y ~ x'
@@ -102,15 +98,15 @@ ggplot(data = mtcars) +
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
-Looking at disassociated data is also possible via facet\_scramble().
+Looking at disassociated data (variables in a dataset are randomly
+reordered) is also possible via facet\_scramble().
 
 ``` r
 # facet_scramble
 ggplot(data = mtcars) +
    aes(x = wt) +
    aes(y = mpg) +
-   facet_scramble(n_facets = 9,
-                  nrow = 3) +
+   facet_scramble(n_facets = 9) +
    geom_point(alpha = .2) +
    geom_smooth(method = lm, se = F) 
 #> `geom_smooth()` using formula = 'y ~ x'
@@ -118,11 +114,11 @@ ggplot(data = mtcars) +
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-# Single realization: facet\_\*(n\_facets = 1)
+# Simulating reality: single sample realization with `facet_*(n_facets = 1)`
 
-You can use facet\_*(n\_facets = 1) to see a single realization. In a
+You can use `facet_*(n_facets = 1)` to see a single realization. In a
 classroom setting you can re-execute code to see multiple realizations
-one at a time. last\_plot() does *not\* produce a fresh sample; but
+one at a time. last\_plot() does *not* produce a fresh sample; but
 overriding facet\_sample does work.
 
 I wonder if some helpers might be nice like facet\_sample\_once() for
@@ -132,7 +128,7 @@ this special case.
 ggplot(data = mtcars) +
    aes(x = wt) +
    aes(y = mpg) +
-   facet_sample(n_sampled = 10, 
+   facet_sample(n_sampled = 10,
                 n_facets = 1) +
    geom_point(alpha = .5) +
    geom_smooth(method = lm, se = F)
@@ -143,6 +139,7 @@ ggplot(data = mtcars) +
 
 ``` r
 
+# replace facet declaration
 last_plot() + facet_sample(n_sampled = 10, n_facets = 1)
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
